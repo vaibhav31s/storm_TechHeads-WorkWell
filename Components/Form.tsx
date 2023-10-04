@@ -55,16 +55,17 @@ const Form = (props: Props) => {
     fetchData(); 
    },[])
   const [title, setTitle] = useState("This is title");
-  // const questionss = datas.questions;
+  const questionss = datas?.questions;
+  console.log("questions", questionss);
   return (
     <div className=" flex-col border rounded-md dark:text-white text-black p-2">
       <div className="justify-center flex flex-row justify-items-center items-center relative">
       <h1 className="text-2xl font-bold ">{datas?.title}</h1>
       </div>
      
-        {/* {questionss.map((question, index) => {
+        {datas?.questions && questionss && questionss.map((question, index) => {
           return <Question index={index} arr={responses} title = {question.title}/>;
-        })} */}
+        })}
 
         <div className="flex flex-col space-y-2">
           <label className="text-xl">Any other comments?</label>
