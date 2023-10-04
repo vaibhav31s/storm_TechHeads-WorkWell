@@ -74,11 +74,10 @@ const Employee: React.FC =  () => {
   };
 
   const [nav, setNav] = useState(false);
+  const [formIIID, setFormIIID] = useState<any>();
   // Modal using CSS
   const [showModal, setShowModal] = useState(false);
-  const modal = () => {
-    setShowModal(!showModal);
-  };
+
 
   return (
     <div className="flex justify-between">
@@ -147,12 +146,17 @@ const Employee: React.FC =  () => {
           </nav>
         </div>
       </div>
+
+
+
       <div className="max-w-[1640px] sm:w-full w-4/5 mx-auto">
         {/* Forms */}
         <div className="max-w-[1640px] mx-auto p-4 py-12 grid md:grid-cols-3 gap-6">
           {/* Card */}
           {formData && formData.forms && formData.forms.map((item, index) => (
             <div className="rounded-xl relative">
+              
+
               {/* Overlay */}
               <div className="absolute w-full h-full bg-black/50 rounded-xl text-white">
                 <p className="font-bold text-2xl px-2 pt-4">{item.title}</p>
@@ -161,7 +165,8 @@ const Employee: React.FC =  () => {
                 <button
                   className="absolute bottom-4  m-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                   onClick={() => {
-                    setShowModal(!showModal);
+                    setShowModal(true);
+                    setFormIIID(item.id);
                   }}
                 >
                   Fill Form
@@ -172,7 +177,13 @@ const Employee: React.FC =  () => {
                 </button>
 
               </div>
-              {showModal && (
+             
+              <img
+                className="max-h-[160px] md:max-h-[200px] w-full object-cover rounded-xl"
+                src="https://images.pexels.com/photos/955392/pexels-photo-955392.jpeg?auto=compress&cs=tinysrgb&w=600"
+              />
+
+               {showModal && (
             <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-black bg-opacity-50">
               <div className="bg-white dark:bg-black p-4 rounded shadow-lg">
                 <div className="flex justify-end">
@@ -183,15 +194,13 @@ const Employee: React.FC =  () => {
                     &times;
                   </button>
                 </div>
-                <Form formId = {item.id} />
+                <Form formId = {formIIID} model = {setShowModal} />
               </div>
             </div>
           )}
-              <img
-                className="max-h-[160px] md:max-h-[200px] w-full object-cover rounded-xl"
-                src="https://images.pexels.com/photos/955392/pexels-photo-955392.jpeg?auto=compress&cs=tinysrgb&w=600"
-              />
             </div>
+
+
           ))}
           {/* Card */}
 

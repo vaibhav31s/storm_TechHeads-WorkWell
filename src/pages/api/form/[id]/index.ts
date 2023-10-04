@@ -18,8 +18,8 @@ const submit = async (req: NextApiRequest, res: NextApiResponse) => {
   
   try {
     const formId :any = req.query.id;
-    console.log(req.body)
-    const { userId, questions, responses } = req.body;
+    const x = JSON.parse(req.body)
+    const { userId, questions, responses } = x;
     console.log("questions",questions)
     
     
