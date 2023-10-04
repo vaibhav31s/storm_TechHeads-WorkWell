@@ -1,17 +1,17 @@
 import React from 'react'
 
 type Props = {
-    id: number;
-    arr: Array<number>;
+  index: number;
+  arr: Array<any>;
+  title: string;
 }
 
 const Question = (props: Props) => {
-    var id = props.id;
-    var arr = props.arr;
-    var [value, setValue] = React.useState(id);
+    var {index, arr, title} = props;
+    var [value, setValue] = React.useState("0");
   return (
     <div>
-    <label className="text-xl">How satisfied are you with your job?</label>
+    <label className="text-xl">{title}</label>
     <input
       className="w-full"
       type="range"
@@ -20,8 +20,9 @@ const Question = (props: Props) => {
       value={value}
       onChange={
         (event) => {
-            setValue(Number(event.target.value))
-            arr[id] = Number(event.target.value)
+            setValue(event.target.value)
+            arr[index] = event.target.value
+
         }
     }
     />

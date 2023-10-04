@@ -16,13 +16,16 @@ const retrieve = async (req: NextApiRequest, res: NextApiResponse) => {
 
 const submit = async (req: NextApiRequest, res: NextApiResponse) => {
     try {
-      const formId :any  = req.query.id;
-      const { userId, questionIds, responses } = req.body;
+      const formId :any = req.query.id;
+      const x = JSON.parse(req.body);
+      const { userId, questions, responses } = x;
+      console.log("questions",questions)
       
       
+      console.log("Hello")
       // Loop through questionIds and responses arrays
-      for (let i = 0; i < questionIds.length; i++) {
-        const questionId = questionIds[i].id;
+      for (let i = 0; i < questions.length; i++) {
+        const questionId = questions[i].id;
         const responseText = responses[i]; // Assuming responses array matches questionIds
       
         // Create a response record for each question
