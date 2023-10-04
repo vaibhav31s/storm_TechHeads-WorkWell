@@ -18,8 +18,8 @@ const submit = async (req: NextApiRequest, res: NextApiResponse) => {
   
   try {
     const formId :any = req.query.id;
-    const x = JSON.parse(req.body)
-    const { userId, questions, responses } = x;
+    // const x = JSON.parse(req.body)
+    const { userId, questions, responses } = req.body;
     console.log("questions",questions)
     
     
@@ -44,6 +44,9 @@ const submit = async (req: NextApiRequest, res: NextApiResponse) => {
         id: userId // Provide the specific userId to identify the user you want to update
       },
       data: {
+        points : {
+          increment:50
+        },
         form: {
           connect: {
             id: formId // Provide the new formId you want to associate with the user

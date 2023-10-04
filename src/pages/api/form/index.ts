@@ -35,11 +35,12 @@ const formGen = async (req: NextApiRequest, res: NextApiResponse) => {
     res.status(500).json({ message: "Internal server error" });
   }
 };
-
+//filled Forms
 const ret = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     
     const response = await prisma.user.findMany({select:{form : true}});
+    const r = await prisma.form.findMany()
     const myMap = new Map<any, any>();
 
     const arr : any = []
@@ -60,7 +61,7 @@ const ret = async (req: NextApiRequest, res: NextApiResponse) => {
       out.push({x , freq : myMap.get(x.id)})
     }
     
-    res.status(200).json({forms : out});
+    res.status(200).json({Filledforms : out , allForms : r});
   } catch (err) {
     console.log(err);
     res.status(500).json({ message: "Internal server error" });
