@@ -47,7 +47,7 @@ const HRDashboard = () => {
         </Card>
       </div>
 
-      <div className="flex chat-container mt-8 justify-center items-center">
+      <div className="flex chat-container mt-8">
         <BarChart />
       </div>
     </>
@@ -57,7 +57,7 @@ type Props = {};
 
 const page = (props: Props) => {
   const [cur, setCur] = useState(1);
-  const handleClick = (key) => {
+  const handleClick = (key: React.SetStateAction<number>) => {
     setCur(key);
     console.log(cur);
   };
