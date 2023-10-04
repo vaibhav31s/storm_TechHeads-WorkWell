@@ -23,7 +23,7 @@ const submit = async (req: NextApiRequest, res: NextApiResponse) => {
       
       // Loop through questionIds and responses arrays
       for (let i = 0; i < questionIds.length; i++) {
-        const questionId = questionIds[i];
+        const questionId = questionIds[i].id;
         const responseText = responses[i]; // Assuming responses array matches questionIds
       
         // Create a response record for each question
