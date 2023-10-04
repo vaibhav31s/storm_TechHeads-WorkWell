@@ -5,7 +5,7 @@ const ApexChart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
 const BarChart = () => {
   const [userData, setUserData]= useState(null);
-  
+  let res={}
   
   useEffect(()=>{
      fetch("/api/pillars")
@@ -16,6 +16,8 @@ const BarChart = () => {
       return response.json();
      })
      .then((data)=>{
+       console.log(data)
+       res=data
        console.log(data)
       setUserData(data)
      })
