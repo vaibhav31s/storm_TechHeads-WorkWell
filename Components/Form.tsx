@@ -76,7 +76,7 @@ const Form = (props: Props) => {
   const [title, setTitle] = useState("This is title");
   const questionss = datas.questions;
   return (
-    <div className="justify-center items-center flex flex-col border rounded-md ">
+    <div className="justify-center items-center flex flex-col border rounded-md dark:text-white">
       
       <div className="flex flex-col border p-10 space-y-9 w-1/3 m-10 rounded-md">
       <h1 className="text-2xl font-bold">{datas?.title}</h1>
