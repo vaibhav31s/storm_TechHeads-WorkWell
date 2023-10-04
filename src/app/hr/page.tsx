@@ -6,7 +6,8 @@ import React, { useState } from "react";
 import { BsFillPersonFill } from "react-icons/bs";
 import { GrUserManager } from "react-icons/gr";
 import { RiSurveyFill } from "react-icons/ri";
-
+import Survey from '@/Components/Survey'
+import Rewards from "@/Components/Rewards";
 // import {HiUser} from 'react-icon/hi';
 let emp_no = 50;
 
@@ -82,9 +83,11 @@ const page = (props: Props) => {
             </Sidebar.ItemGroup>
           </Sidebar.Items>
         </Sidebar>
-        <div className="h-full m-4">
+        <div className="h-full w-full m-4 justify-center items-center">
           {cur === 1 && <HRDashboard/>}
           {cur === 2 && <FeedbackCard/>}
+          {cur === 3 && <Survey/>}
+          {cur === 4 && <Rewards/>}
         </div>
       </div>
     </>
