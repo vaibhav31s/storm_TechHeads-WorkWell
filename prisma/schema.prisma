@@ -10,49 +10,49 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
 model User {
-  id       String      @id @default(auto()) @map("_id") @db.ObjectId
-  avatar    String
-  email     String    @unique
-  password  String      @default("")
-  name      String
-  role      String // HR , manager , employee
-  empId    String?  @unique   
-  form Form[]
+  id       String     @id @default(auto()) @map("_id") @db.ObjectId
+  avatar   String
+  email    String     @unique
+  password String     @default("")
+  name     String
+  role     String // HR , manager , employee
+  empId    String?  
+  form     Form[]
+  Response Response[]
 }
 
-
-
 model Form {
-  id        String      @id @default(auto()) @map("_id") @db.ObjectId
-  title     String
+  id          String     @id @default(auto()) @map("_id") @db.ObjectId
+  title       String
   description String
-  questions Question[]
-  user      User[]       
-  responses Response[]
+  questions   Question[]
+  cc        String[]
+  responses   Response[]
+  User        User?      @relation(fields: [userId], references: [id])
+  userId      String?    @db.ObjectId
 }
 
 model Question {
-  id        String      @id @default(auto()) @map("_id") @db.ObjectId
-  title     String
-  type      String[]
-  options   String[]
-  form      Form        @relation(fields: [formId], references: [id])
-  formId    String
+  id       String     @id @default(auto()) @map("_id") @db.ObjectId
+  title    String
+  type     String[]
+  options  String[]
+  form     Form       @relation(fields: [formId], references: [id])
+  formId   String @db.ObjectId
+  Response Response[]
 }
 
-model Response{
-   id        String      @id @default(auto()) @map("_id") @db.ObjectId
+model Response {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
 
-   form      Form        @relation(fields: [formId] , references : [id])
-   user      User        @relation(fields :[userId] , references :[id])
-   question  Question    @relation(fields:[questionId] , references:[id])
-   
-   formId     String
-   userId     String
-   questionId String
+  form     Form     @relation(fields: [formId], references: [id])
+  user     User     @relation(fields: [userId], references: [id])
+  question Question @relation(fields: [questionId], references: [id])
 
-   answer String
+  formId     String @db.ObjectId
+  userId     String @db.ObjectId
+  questionId String @db.ObjectId
+
+  answer String
 }
-
