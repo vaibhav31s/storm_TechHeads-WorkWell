@@ -155,59 +155,51 @@ const Register = (props: Props) => {
             </h1>
         <div className="w-full px-4 pt-5 pb-6 mx-auto mt-8 mb-6 bg-white rounded-none shadow-xl sm:rounded-lg sm:w-10/12 md:w-8/12 lg:w-6/12 xl:w-4/12 sm:px-6">
           <h1 className="mb-4 text-lg font-semibold text-left text-gray-900">
-            Registration Page of WorkWell 
+            Registration:
           </h1>
           <div className="mb-8 space-y-4">
-            <label className="block">
-              <span className="block mb-1 text-xs font-medium text-gray-700">
-                Employee Name
-              </span>
+            <label className="block py-1">
+              
               <input
                 className="form-input"
                 type="text"
-                placeholder="Ex. FirstName LastName"
+                placeholder="Enter Employee Name"
                 required
                 onChange={(e) => {
                   setName(e.target.value);
                 }}
               />
             </label>
-            <label className="block">
-              <span className="block mb-1 text-xs font-medium text-gray-700">
-                Employee Id
-              </span>
+            <label className="block py-1">
+              
               <input
                 className="form-input "
                 type="text"
-                placeholder="Ex. 989238"
+                placeholder="Enter Employee Id"
                 required
                 onChange={(e) => {
                   setRollno(e.target.value);
                 }}
               />
             </label>
-            <label className="block">
-              <span className="block mb-1 text-xs font-medium text-gray-700">
-                Employee Email
-              </span>
+            <label className="block py-1">
+              
               <input
                 className="form-input"
                 type="email"
-                placeholder="Ex. james@bond.com"
+                placeholder="Enter Employee Email"
                 required
                 onChange={(e) => {
                   setEmail(e.target.value);
                 }}
               />
             </label>
-            <label className="block">
-              <span className="block mb-1 text-xs font-medium text-gray-700">
-                Your Password
-              </span>
+            <label className="block py-1">
+              
               <input
                 className="form-input "
                 type="password"
-                placeholder="••••••••"
+                placeholder="Your Password"
                 required
                 onChange={(e) => {
                   setPassword(e.target.value);
@@ -215,14 +207,11 @@ const Register = (props: Props) => {
               />
             </label>
 
-            <label className="block">
-              <span className="block mb-1 text-xs font-medium text-gray-700">
-                Confirm Password
-              </span>
+            <label className="block py-1">
               <input
                 className="form-input "
                 type="password2"
-                placeholder="••••••••"
+                placeholder="Confirm Password"
                 required
               />
             </label>
