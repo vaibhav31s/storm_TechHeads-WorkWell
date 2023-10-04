@@ -5,6 +5,7 @@ import { BsFillPersonFill } from "react-icons/bs";
 import { GrUserManager } from "react-icons/gr";
 import { RiSurveyFill } from "react-icons/ri";
 // import {HiUser} from 'react-icon/hi';
+import ApexChart from "react-apexcharts";
 
 type Props = {};
 

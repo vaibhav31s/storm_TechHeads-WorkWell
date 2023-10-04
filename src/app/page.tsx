@@ -5,6 +5,7 @@ import Landing from "@/Components/Landing";
 import { useRouter } from "next/navigation";
 import Loading from "./student/loading";
 import Footer from "@/Components/Footer/Footer";
+import Form from "@/Components/Form";
 // import Landing from "@/Components/Landing";
 type Props = {};
 
@@ -20,12 +21,16 @@ const Hello = (props: Props) => {
     }
     if (session?.user?.role === "employee") {
       router.push("/employee");
+    } else {
+      
+      return (
+        <div>
+          <Form />
+        </div>
+      )
     }
 
-    if(session?.user?.role === "HR"){
-      router.push("/hr");
-    }
-
+    
 
     
     return (

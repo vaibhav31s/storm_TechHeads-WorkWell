@@ -1,32 +1,30 @@
-'use client'
-import React from 'react'
-type Props = {}
+"use client";
+import React from "react";
+import Question from "./Question";
+type Props = {};
 //option to select from 1 to 10
-import Slider from 'react-rangeslider'
 
-handleOnChange = (value) => {
-    this.setState({
-      volume: value
-    })
-  }
- 
+
+
 const Form = (props: Props) => {
-    const [value, setValue] = React.useState(0);
-    return (
-    <div className='justify-center items-center flex flex-col'>
-        
-            <label htmlFor="name">Question no 1</label>
-            <div className="flex  w-64 m-auto items-center h-32 justify-center">
-            <Slider
-                value={10
-                }
-                orientation="vertical"
-                onChange={this.handleOnChange}
-            />
-            </div>
-    
-    </div>
-  )
-}
+  const responses = new Array(10);
 
-export default Form
+  return (
+    <div className="justify-center items-center flex flex-col border border-red-300">
+      <div className="flex flex-col border border-red-400 p-10 space-y-9">
+      <Question id={0}  arr = {responses}/>
+
+      <Question id={1}  arr = {responses}/>
+
+      <Question id={2} arr = {responses} />
+
+
+        <button className="border shadow-lg p-2 fill-black bg-blue-600 rounded-md	 " onClick={()=>console.log(responses)}>
+          Click Here to Submit  
+        </button>
+      </div>
+    </div>
+  );
+};
+
+export default Form;
