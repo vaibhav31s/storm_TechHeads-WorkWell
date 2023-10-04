@@ -3,11 +3,13 @@ import React, { useState } from "react";
 import { useSession, signOut } from "next-auth/react";
 import Question from "./Question";
 import Form from "../types/Form";
+import { ToastContainer, toast } from "react-toastify";
 
 
 
 type Props = {
   formId: string;
+  setShowModal: React.Dispatch<React.SetStateAction<boolean>>
 };
 //option to select from 1 to 10
 
@@ -16,7 +18,9 @@ const Form = (props: Props) => {
   const { data, status } = useSession();
   const [forms, setForms] = useState<Form[]>([]);
 
+
   const formId = props.formId;
+  const setShowModal = props.setShowModal;
   console.log("form user " ,data?.user?.id)
 
   console.log("form id " ,formId)
@@ -59,10 +63,10 @@ const Form = (props: Props) => {
   console.log("questions", questionss);
   return (
     <div className=" flex-col border rounded-md dark:text-white text-black p-2">
+      
       <div className="justify-center flex flex-row justify-items-center items-center relative">
       <h1 className="text-2xl font-bold ">{datas?.title}</h1>
       </div>
-     
         {datas?.questions && questionss && questionss.map((question, index) => {
           return <Question index={index} arr={responses} title = {question.title}/>;
         })}
@@ -72,7 +76,7 @@ const Form = (props: Props) => {
           <textarea className="border  rounded-md p-2 dark:text-black  "></textarea>
         </div>
         <div className="justify-center flex flex-row justify-items-center items-center relative ">
-        {/* <button
+        <button
           className="border shadow-lg p-2 fill-black bg-blue-600 rounded-md 	 "
           onClick={async() =>  {
            await fetch(`/api/form/${datas.id}`, {
@@ -83,11 +87,21 @@ const Form = (props: Props) => {
                 questions: questionss,
                 responses: responses,
               }),
-            });
-          }}
+            }).then((res) => {
+              if (res.status === 200) {
+                alert("Successfully Fille the form!")
+                setShowModal(false)
+              } else {
+                alert("There is some issue Please try again letter")
+                setShowModal(false)
+              }
+            }
+            );
+          }
+        }
         >
           Click Here to Submit
-        </button> */}
+        </button>
         </div>
     </div>
   );
