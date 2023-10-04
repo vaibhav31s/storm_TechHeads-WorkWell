@@ -14,10 +14,13 @@ import { data } from "./data.js";
 import { useSession, signIn, signOut } from "next-auth/react";
 import Form from "../../../Components/Form";
 
-const Employee: React.FC =  () => {
-  const session = useSession();
+const Employee =  () => {
+  const session =  useSession();
+  while(!session) ;
 
+  console.log(session)
   const datas = async () => {
+    
     try {
       const response = await fetch("/api/form/user", {
         method: "POST",
@@ -25,7 +28,7 @@ const Employee: React.FC =  () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          userId: session.data?.id,
+          userId: session.data?.user?.id,
         }),
       });
   
@@ -194,7 +197,7 @@ const Employee: React.FC =  () => {
                     &times;
                   </button>
                 </div>
-                <Form formId = {formIIID} model = {setShowModal} />
+                <Form formId = {formIIID} modal = {setShowModal}  fetchData1 = {fetchData}/>
               </div>
             </div>
           )}
