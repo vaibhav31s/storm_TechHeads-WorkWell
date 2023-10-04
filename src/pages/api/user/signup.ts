@@ -5,11 +5,11 @@ const saltRounds = 10;
 
 const signup = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
-    const { email, password, name, avatar, role ,rollno} = req.body;
-    console.log(email, password, name, avatar, role,rollno);
+    const { email, password, name, avatar, role , empId, form,Response} = req.body;
+    console.log(email, password, name, avatar, role, empId);
     
     
-    const user = await prisma.user.findUnique({
+    const user = await prisma.user.findFirst({
       where: {
         // @ts-ignore
         email: email,
@@ -20,16 +20,16 @@ const signup = async (req: NextApiRequest, res: NextApiResponse) => {
       return;
     }
 
-    const rooll = await prisma.user.findUnique({
-      where: {
-        // @ts-ignore
-        rollno: rollno,
-      },
-    });
+    // const rooll = await prisma.user.findUnique({
+    //   where: {
+    //     // @ts-ignore
+    //     empId: empId,
+    //   },
+    // });
 
-    if(rollno){
-      if (rooll) {
-        res.status(400).json({ message: "Rollno already exist" });
+    if(empId){
+      if (empId) {
+        res.status(400).json({ message: "empId already exist" });
         return;
       }
     }
@@ -46,7 +46,7 @@ const signup = async (req: NextApiRequest, res: NextApiResponse) => {
           name: name,
           avatar: avatar,
           role: role,
-          rollno: rollno,
+          empId: empId,
         },
       });
       res.status(200).json(newUser);
