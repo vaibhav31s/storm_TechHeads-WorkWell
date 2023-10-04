@@ -12,7 +12,6 @@ const retrieve = async (req: NextApiRequest, res: NextApiResponse) => {
   catch(err){
     res.status(500).json({message:"INTERNAL SERVER ERROR"});
   }
-
 }
 
 const submit = async (req: NextApiRequest, res: NextApiResponse) => {
