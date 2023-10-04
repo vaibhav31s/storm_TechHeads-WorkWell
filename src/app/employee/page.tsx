@@ -11,10 +11,60 @@ import {
 } from "react-icons/ai";
 import { BsFillCartFill, BsFillSaveFill } from "react-icons/bs";
 import { data } from "./data.js";
+import { useSession, signIn, signOut } from "next-auth/react";
 import Form from "../../../Components/Form";
 
-const employee = () => {
-  /*filters*/
+const Employee: React.FC =  () => {
+  const session = useSession();
+
+  const datas = async () => {
+    try {
+      const response = await fetch("/api/form/user", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          userId: session.data?.id,
+        }),
+      });
+  
+      if (response.ok) {
+        const data = await response.json();
+        console.log(data);
+        return data;
+      } else {
+        console.error("Failed to fetch data:", response.status);
+        throw new Error("Failed to fetch data");
+      }
+    } catch (error) {
+      console.error("Error while fetching data:", error);
+      throw error;
+    }
+  };
+  const [formData, setFormData] = useState<Form[]>([]);
+  
+  const fetchData = async () => {
+    try {
+      const result = await datas();
+      setFormData(result);
+      console.log(formData)
+      // Now you can use 'result' here
+    } catch (error) {
+      // Handle errors here
+    }
+  };
+  
+ React.useEffect(()=>{
+  alert("useEffect");
+  fetchData(); 
+ },[])// Call the fetchData function to initiate the data fetching
+
+
+
+  // Bulk attendance
+
+  /* Filters */
   const [foods, setFoods] = useState(data);
   const filterType = (category: string) => {
     setFoods(
@@ -25,13 +75,12 @@ const employee = () => {
   };
 
   const [nav, setNav] = useState(false);
-  //modal using css
+  // Modal using CSS
   const [showModal, setShowModal] = useState(false);
   const modal = () => {
     setShowModal(!showModal);
-  }
+  };
 
-  
   return (
     <div className="flex justify-between">
       <div className="hidden lg:flex lg:w-1/5">
@@ -58,7 +107,10 @@ const employee = () => {
           </div>
           <nav>
             <ul className="dark:text-white flex flex-col p-4 text-gray-800">
-              <li onClick={() => setFoods(data)} className="text-xl py-4 flex">
+              <li
+                onClick={() => setFoods(data)}
+                className="text-xl py-4 flex"
+              >
                 <BsFillSaveFill size={25} className="mr-4" />
                 All
               </li>
@@ -97,7 +149,7 @@ const employee = () => {
         </div>
       </div>
       <div className="max-w-[1640px] sm:w-full w-4/5 mx-auto">
-        {/* //forms */}
+        {/* Forms */}
         <div className="max-w-[1640px] mx-auto p-4 py-12 grid md:grid-cols-3 gap-6">
           {/* Card */}
           {foods.map((item, index) => (
@@ -106,9 +158,12 @@ const employee = () => {
               <div className="absolute w-full h-full bg-black/50 rounded-xl text-white">
                 <p className="font-bold text-2xl px-2 pt-4">{item.category}</p>
                 <p className="px-2">{item.name}</p>
-                <button className="absolute bottom-4  bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={()=>{
-                  setShowModal(!showModal)
-                }}>
+                <button
+                  className="absolute bottom-4  bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                  onClick={() => {
+                    setShowModal(!showModal);
+                  }}
+                >
                   {item.message}
                 </button>
               </div>
@@ -118,29 +173,27 @@ const employee = () => {
               />
             </div>
           ))}
-          {/* card */}
-
+          {/* Card */}
 
           {showModal && (
-        <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-black bg-opacity-50">
-          <div className="bg-white dark:bg-black p-4 rounded shadow-lg">
-            <div className="flex justify-end">
-              <button
-                onClick={() => setShowModal(false)}
-                className="text-gray-500 hover:text-gray-800"
-              >
-                &times;
-              </button>
+            <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-black bg-opacity-50">
+              <div className="bg-white dark:bg-black p-4 rounded shadow-lg">
+                <div className="flex justify-end">
+                  <button
+                    onClick={() => setShowModal(false)}
+                    className="text-gray-500 hover:text-gray-800"
+                  >
+                    &times;
+                  </button>
+                </div>
+                <Form />
+              </div>
             </div>
-            <Form/>
-            
-          </div>
-        </div>
-      )}
+          )}
         </div>
       </div>
     </div>
   );
 };
 
-export default employee;
+export default Employee;
