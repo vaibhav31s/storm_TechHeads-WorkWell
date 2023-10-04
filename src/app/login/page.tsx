@@ -77,7 +77,7 @@ const Login = (props: Props) => {
       
           <div className="md:w-2/3 px-2 md:px-2 sm:w-screen">
           <h1 className="text-4xl antialiased font-bold dark:text-white pb-2">
-              Welcome to QuickCheckTech
+              Welcome to WorkWell
             </h1> <h1 className="mb-4 text-lg font-semibold text-left dark:text-white  text-gray-900">
               Log in to your account
             </h1>
