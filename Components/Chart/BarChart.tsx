@@ -1,22 +1,41 @@
 'use client'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import dynamic from "next/dynamic";
 const ApexChart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
 const BarChart = () => {
+  const [userData, setUserData]= useState(null);
+  
+  
+  useEffect(()=>{
+     fetch("/api/pillars")
+     .then((response)=>{
+      if(!response.ok){
+        throw new Error("Network response was not ok");
+      }
+      return response.json();
+     })
+     .then((data)=>{
+       console.log(data)
+      setUserData(data)
+     })
+     .catch((error)=>{
+      console.log("Error fetching user data:",error)
+     })
+  },[])
   const state = {
     options: {
       chart: {
         id: "basic-bar"
       },
       xaxis: {
-        categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999]
+        categories: ["Communication", "Productivity", "Motivation", "Engagement"]
       }
     },
     series: [
       {
-        name: "series-1",
-        data: [30, 40, 45, 50, 49, 60, 70, 91]
+        name: "Overall Enterprise Score",
+        data: [40, 90, 45, 30]
       }
     ]
   };
