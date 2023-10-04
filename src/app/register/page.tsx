@@ -151,16 +151,16 @@ const Register = (props: Props) => {
           theme="light"
         />
         <h1 className="text-4xl antialiased font-bold dark:text-white text-center">
-              Welcome to QuickCheck Tech
+              Welcome to WorkWell
             </h1>
         <div className="w-full px-4 pt-5 pb-6 mx-auto mt-8 mb-6 bg-white rounded-none shadow-xl sm:rounded-lg sm:w-10/12 md:w-8/12 lg:w-6/12 xl:w-4/12 sm:px-6">
           <h1 className="mb-4 text-lg font-semibold text-left text-gray-900">
-            Registration Page of QuickCheck Tech 
+            Registration Page of WorkWell 
           </h1>
           <div className="mb-8 space-y-4">
             <label className="block">
               <span className="block mb-1 text-xs font-medium text-gray-700">
-                Your Name
+                Employee Name
               </span>
               <input
                 className="form-input"
@@ -174,12 +174,12 @@ const Register = (props: Props) => {
             </label>
             <label className="block">
               <span className="block mb-1 text-xs font-medium text-gray-700">
-                Your Rollno
+                Employee Id
               </span>
               <input
                 className="form-input "
                 type="text"
-                placeholder="Ex. 1 2 3 4 5 6 7 8 9"
+                placeholder="Ex. 989238"
                 required
                 onChange={(e) => {
                   setRollno(e.target.value);
@@ -188,7 +188,7 @@ const Register = (props: Props) => {
             </label>
             <label className="block">
               <span className="block mb-1 text-xs font-medium text-gray-700">
-                Your Email
+                Employee Email
               </span>
               <input
                 className="form-input"

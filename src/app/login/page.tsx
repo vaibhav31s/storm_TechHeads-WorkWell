@@ -73,15 +73,15 @@ const Login = (props: Props) => {
   const [count, setCount] = React.useState(0);
   return (
     <section className=" min-h-screen   flex items-center justify-between w-full">
-        <div className=" flex rounded-2xl pt-10 w-full px-8 md:px-20 items-center">
+        <div className=" flex rounded-2xl pt-10 w-3/4 px-12  md:px-20 items-center">
       
-          <div className="md:w-2/3 px-2 md:px-2 sm:w-screen">
+          <div className="md:w-3/4 px-2 mx-auto  md:px-2 sm:w-screen">
           <h1 className="text-4xl antialiased font-bold dark:text-white pb-2">
               Welcome to WorkWell
             </h1> <h1 className="mb-4 text-lg font-semibold text-left dark:text-white  text-gray-900">
               Log in to your account
             </h1>
-            <form className="mb-8 space-y-4" onSubmit={submitHandler}>
+            <form className="mb-4 space-y-4" onSubmit={submitHandler}>
               <label className="block">
                 <span className="block mb-1 text-xs font-medium text-gray-700">
                   Your Email
@@ -124,13 +124,13 @@ const Login = (props: Props) => {
               />
               <input
                 type="submit"
-                className="bg-blue-200 w-full py-3 mt-1 justify-center btn btn-primary"
+                className="bg-blue-200 dark:bg-blue-700 w-full py-3 mt-1 justify-center btn btn-primary"
                 value="Login"
               />
             </form>
             <div className="space-y-8">
-              <div className="text-center border-b border-gray-200">
-                <span className="p-2 text-xs font-semibold tracking-wide text-gray-600 uppercase bg-white ">
+              <div className="text-center border-b p-1 border-gray-200">
+                <span className="p-2 text-xs font-semibold tracking-wide text-gray-600 uppercase dark:text-white ">
                   Or
                 </span>
               </div>
