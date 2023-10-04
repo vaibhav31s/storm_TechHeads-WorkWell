@@ -17,8 +17,8 @@ model User {
   email     String    @unique
   password  String      @default("")
   name      String
-  role      String // admin, teacher, student
-  rollno    String  @unique   
+  role      String // HR , manager , employee
+  empId    String?  @unique   
   form Form[]
 }
 
@@ -29,25 +29,30 @@ model Form {
   title     String
   description String
   questions Question[]
-  user      User        @relation(fields: [userId], references: [id])
-  userId    String
+  user      User[]       
   responses Response[]
 }
 
 model Question {
   id        String      @id @default(auto()) @map("_id") @db.ObjectId
   title     String
-  type      String
+  type      String[]
   options   String[]
   form      Form        @relation(fields: [formId], references: [id])
   formId    String
 }
 
-model Response {
-  id        String      @id @default(auto()) @map("_id") @db.ObjectId
-  form      Form        @relation(fields: [formId], references: [id])
-  formId    String
-  user      User        @relation(fields: [userId], references: [id])
-  userId    String
-  answers   Answer[]
+model Response{
+   id        String      @id @default(auto()) @map("_id") @db.ObjectId
+
+   form      Form        @relation(fields: [formId] , references : [id])
+   user      User        @relation(fields :[userId] , references :[id])
+   question  Question    @relation(fields:[questionId] , references:[id])
+   
+   formId     String
+   userId     String
+   questionId String
+
+   answer String
 }
+
