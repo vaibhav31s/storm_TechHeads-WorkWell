@@ -35,7 +35,38 @@ const formGen = async (req: NextApiRequest, res: NextApiResponse) => {
     res.status(500).json({ message: "Internal server error" });
   }
 };
+//filled Forms
+const ret = async (req: NextApiRequest, res: NextApiResponse) => {
+  try {
+    
+    const response = await prisma.user.findMany({select:{form : true}});
+    const r = await prisma.form.findMany()
+    const myMap = new Map<any, any>();
 
+    const arr : any = []
+
+    let x : any;
+    for(x of response){
+        x.form.map((f : any) => {
+          if(myMap.has(f.id) === false){
+            myMap.set(f.id , 1);
+            arr.push(f);
+          }
+          else myMap.set(f.id , parseInt(myMap.get(f.id)) + 1);
+        })
+    }
+
+    let out : any = [];
+    for(x of arr){
+      out.push({x , freq : myMap.get(x.id)})
+    }
+    
+    res.status(200).json({Filledforms : out , allForms : r});
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
@@ -43,6 +74,7 @@ export default async function handler(
   const method = req.method;
   switch (method) {
     case "GET":
+      ret(req , res)
       break;
     case "POST":
       formGen(req, res);
