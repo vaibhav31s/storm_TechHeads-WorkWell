@@ -36,6 +36,17 @@ const formGen = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 };
 
+const ret = async (req: NextApiRequest, res: NextApiResponse) => {
+  try {
+    
+    const response = await prisma.user.findMany({select:{form : true}});
+    
+    
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
@@ -43,6 +54,7 @@ export default async function handler(
   const method = req.method;
   switch (method) {
     case "GET":
+      ret(req , res)
       break;
     case "POST":
       formGen(req, res);
