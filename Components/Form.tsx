@@ -9,7 +9,8 @@ import { ToastContainer, toast } from "react-toastify";
 
 type Props = {
   formId: string;
-  setShowModal: React.Dispatch<React.SetStateAction<boolean>>
+  modal : any
+  fetchData1 : any
 };
 //option to select from 1 to 10
 
@@ -17,10 +18,10 @@ type Props = {
 const Form = (props: Props) => {
   const { data, status } = useSession();
   const [forms, setForms] = useState<Form[]>([]);
-
+  const fetchData1 = props.fetchData1
 
   const formId = props.formId;
-  const setShowModal = props.setShowModal;
+  const setShowModal = props.modal;
   console.log("form user " ,data?.user?.id)
 
   console.log("form id " ,formId)
@@ -42,7 +43,10 @@ const Form = (props: Props) => {
       });
 
       if (response.ok) {
-        const data = await response.json();
+        const data = await response.json().then((res) => {
+          console.log(res)
+          return res
+        });
         console.log(data)
         setDatas(data.data);
       } else {
@@ -91,9 +95,12 @@ const Form = (props: Props) => {
               if (res.status === 200) {
                 alert("Successfully Fille the form!")
                 setShowModal(false)
+                fetchData1()
+                
               } else {
                 alert("There is some issue Please try again letter")
                 setShowModal(false)
+                fetchData1()
               }
             }
             );
