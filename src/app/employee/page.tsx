@@ -42,7 +42,7 @@ const Employee: React.FC =  () => {
       throw error;
     }
   };
-  const [formData, setFormData] = useState<Form[]>([]);
+  const [formData, setFormData] = useState<any>();
   
   const fetchData = async () => {
     try {
@@ -53,10 +53,9 @@ const Employee: React.FC =  () => {
     } catch (error) {
       // Handle errors here
     }
+    
   };
-  
  React.useEffect(()=>{
-  alert("useEffect");
   fetchData(); 
  },[])// Call the fetchData function to initiate the data fetching
 
@@ -152,30 +151,28 @@ const Employee: React.FC =  () => {
         {/* Forms */}
         <div className="max-w-[1640px] mx-auto p-4 py-12 grid md:grid-cols-3 gap-6">
           {/* Card */}
-          {foods.map((item, index) => (
+          {formData && formData.forms && formData.forms.map((item, index) => (
             <div className="rounded-xl relative">
               {/* Overlay */}
               <div className="absolute w-full h-full bg-black/50 rounded-xl text-white">
-                <p className="font-bold text-2xl px-2 pt-4">{item.category}</p>
+                <p className="font-bold text-2xl px-2 pt-4">{item.title}</p>
                 <p className="px-2">{item.name}</p>
+
                 <button
-                  className="absolute bottom-4  bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                  className="absolute bottom-4  m-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                   onClick={() => {
                     setShowModal(!showModal);
                   }}
                 >
-                  {item.message}
+                  Fill Form
                 </button>
-              </div>
-              <img
-                className="max-h-[160px] md:max-h-[200px] w-full object-cover rounded-xl"
-                src={item.image}
-              />
-            </div>
-          ))}
-          {/* Card */}
 
-          {showModal && (
+                <button className="absolute bottom-4 m-2 right-4 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+                  Earn 50 coins <span className="text-sm">+</span>
+                </button>
+
+              </div>
+              {showModal && (
             <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-black bg-opacity-50">
               <div className="bg-white dark:bg-black p-4 rounded shadow-lg">
                 <div className="flex justify-end">
@@ -186,10 +183,19 @@ const Employee: React.FC =  () => {
                     &times;
                   </button>
                 </div>
-                <Form />
+                <Form formId = {item.id} />
               </div>
             </div>
           )}
+              <img
+                className="max-h-[160px] md:max-h-[200px] w-full object-cover rounded-xl"
+                src="https://images.pexels.com/photos/955392/pexels-photo-955392.jpeg?auto=compress&cs=tinysrgb&w=600"
+              />
+            </div>
+          ))}
+          {/* Card */}
+
+          
         </div>
       </div>
     </div>
