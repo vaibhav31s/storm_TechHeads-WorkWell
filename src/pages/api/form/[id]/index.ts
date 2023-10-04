@@ -2,7 +2,18 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { prisma } from "../../../../utils/db";
 
 
+const retrieve = async (req: NextApiRequest, res: NextApiResponse) => {
+  try{
+    const formId : any = req.query.id;
+   const data = await prisma.form.findFirst({where : {id : formId} , include:{questions : true}});
 
+   res.status(200).json({data});
+  }
+  catch(err){
+    res.status(500).json({message:"INTERNAL SERVER ERROR"});
+  }
+
+}
 
 const submit = async (req: NextApiRequest, res: NextApiResponse) => {
     try {
@@ -50,7 +61,7 @@ export default async function handler(
   const method = req.method;
   switch (method) {
     case "GET":
-      
+      retrieve(req , res);
       break;
     case "POST":
       submit(req , res);
