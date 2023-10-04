@@ -23,7 +23,7 @@ const signup = async (req: NextApiRequest, res: NextApiResponse) => {
     const rooll = await prisma.user.findUnique({
       where: {
         // @ts-ignore
-        rollno: rollno,
+        empId: empId,
       },
     });
 

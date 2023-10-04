@@ -21,6 +21,13 @@ const Hello = (props: Props) => {
     if (session?.user?.role === "employee") {
       router.push("/employee");
     }
+
+    if(session?.user?.role === "HR"){
+      router.push("/hr");
+    }
+
+
+    
     return (
       <Loading/>
     );
