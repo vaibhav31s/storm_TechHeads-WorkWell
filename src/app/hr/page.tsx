@@ -1,15 +1,11 @@
-import Form from '@/Components/Form'
 import React from 'react'
 
 type Props = {}
 
-const Hr = (props: Props) => {
+const page = (props: Props) => {
   return (
-    <div>
-      <Form/>
-
-    </div>
+    <div>page</div>
   )
 }
 
-export default Hr
+export default page
