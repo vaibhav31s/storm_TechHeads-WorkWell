@@ -29,18 +29,14 @@ const Hello = (props: Props) => {
         </div>
       )
     }
-
-    
-
-    
     return (
       <Loading/>
     );
   }
   return <div>
-      
-      
-      <Footer />
+      <Landing/>
+
+      {/* <Footer /> */}
     </div>;
 };
 
