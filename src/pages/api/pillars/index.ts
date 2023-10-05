@@ -13,7 +13,8 @@ const data = async (req: NextApiRequest, res: NextApiResponse) => {
 
     const u= await prisma.user.findMany();
     
-    const users : { HR: any, Manager:any, Employee: any } = {"HR" : [] , "Manager" :[] , "Employee":[]};
+
+          const users : { HR: any, Manager:any, Employee: any } = {"HR" : [] , "Manager" :[] , "Employee":[]};
     const attributes : any = {};
     const count : any = {};
     const forms : any = {};
