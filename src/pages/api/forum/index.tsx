@@ -17,16 +17,16 @@ const data  = async (req: NextApiRequest, res: NextApiResponse) => {
 const upload = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
 
-    const {title , description , userId} = req.body;
+    const {title , description , tagged , userId} = req.body;
 
     const z = await prisma.Post.create({data:{
-        title , description , user : {
+        title , description ,tagged, user  : {
             connect:{
                 id : userId
             }
         }
     }})
-    console.log(z)
+    
     res.status(200).json(z)
   } catch (err) {
     console.log(err);

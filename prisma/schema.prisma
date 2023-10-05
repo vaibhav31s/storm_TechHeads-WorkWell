@@ -67,5 +67,6 @@ model Post{
   user User     @relation(fields: [userId], references: [id])
   title String
   description String
+  tagged String[]
   date DateTime @default(now())
 }
