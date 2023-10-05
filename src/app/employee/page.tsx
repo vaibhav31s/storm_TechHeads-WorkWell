@@ -135,39 +135,34 @@ const Employee = () => {
   };
 
   const buyItem = async (rewardId: string, userId: string, price: number) => {
-        await fetch("/api/redeem", {
-          method : "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            userId: session.data?.user?.id,
-            rewardId: rewardId,
-            cost: price,
-          }),
-
-        }).then((res) => {
-          if (res.ok) {
-            res.json().then((data) => {
-              alert("Success")
-              window.location.reload();
-
-            });
-          } else {
-            alert("Error");
-          }
-        }
-        );
-
-
-  }
+    await fetch("/api/redeem", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        userId: session.data?.user?.id,
+        rewardId: rewardId,
+        cost: price,
+      }),
+    }).then((res) => {
+      if (res.ok) {
+        res.json().then((data) => {
+          alert("Success");
+          window.location.reload();
+        });
+      } else {
+        alert("Error");
+      }
+    });
+  };
   const [nav, setNav] = useState(false);
   const [formIIID, setFormIIID] = useState<any>();
   // Modal using CSS
   const [showModal, setShowModal] = useState(false);
   const [buy, setBuy] = useState(false);
   console.log("Filter ", filter);
-  const [curPrice , setCurPrice] = useState(0);
+  const [curPrice, setCurPrice] = useState(0);
   return (
     <div className="flex justify-between">
       <div className="hidden lg:flex lg:w-1/5">
@@ -185,7 +180,9 @@ const Employee = () => {
           />
           <div className="flex items-center p-4 border-b border-purple-800">
             <div className="w-12 h-12 rounded-full  flex items-center justify-center mr-3">
-              <span><img src={session.data?.user?.avatar.img}></img></span>
+              <span>
+                <img src={session.data?.user?.avatar.img}></img>
+              </span>
             </div>
             <div>
               <div className="font-semibold">{session.data?.user?.name}</div>
@@ -221,18 +218,6 @@ const Employee = () => {
                 className="text-xl py-4 flex"
               >
                 <FaWallet size={25} className="mr-4" /> Rewards
-              </li>
-              <li className="text-xl py-4 flex">
-                <MdHelp size={25} className="mr-4" /> Help
-              </li>
-              <li className="text-xl py-4 flex">
-                <AiFillTag size={25} className="mr-4" /> Promotions
-              </li>
-              <li className="text-xl py-4 flex">
-                <BsFillSaveFill size={25} className="mr-4" /> Best Ones
-              </li>
-              <li className="text-xl py-4 flex">
-                <FaUserFriends size={25} className="mr-4" /> Invite Friends
               </li>
             </ul>
           </nav>
@@ -274,8 +259,8 @@ const Employee = () => {
                 />
 
                 {buy && (
-                  <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-black bg-opacity-50">
-                    <div className="bg-white dark:bg-black p-4 rounded shadow-lg">
+                  <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-black bg-opacity-50 dark:text-white shadow-lg rounded-lg">
+                    <div className="bg-white dark:bg-purple-500 dark:bg-black p-4 rounded shadow-lg">
                       <div className="flex justify-end">
                         <button
                           onClick={() => setBuy(false)}
@@ -285,36 +270,37 @@ const Employee = () => {
                         </button>
                       </div>
                       <div>
-                        Are you really want to buy? Available Balance is {session.data?.user?.points}
+                       <h1>Are you really want to buy? Available Balance is{" "} {session.data?.user?.points}</h1> 
+                       
                         {session.data?.user?.points < curPrice ? (
                           <p className="text-red-500">
                             You don't have enough balance
-                            </p>
-                            ) : 
-                            (
-                              <div>
-<button
-                          className="border shadow-lg p-2 fill-black bg-blue-600 rounded-md 	 "
-                          onClick={() => {
-                            setBuy(false);
-                            buyItem(item.id, session.data?.user?.id, item.price);
-                          }}
-                        >
-                          Yes
-                        </button>
-                        <button
-                          className="border shadow-lg p-2 fill-black bg-blue-600 rounded-md 	 "
-                          onClick={() => {
-                            setBuy(false);
-                          }}
-                        >
-                          No
-                        </button>
-                                </div>
-                                
-                            )
-                            }
-                        
+                          </p>
+                        ) : (
+                          <div className=" space-x-4">
+                            <button
+                              className="border shadow-lg p-2 fill-black bg-blue-400 rounded-md 	 "
+                              onClick={() => {
+                                setBuy(false);
+                                buyItem(
+                                  item.id,
+                                  session.data?.user?.id,
+                                  item.price
+                                );
+                              }}
+                            >
+                              Yes
+                            </button>
+                            <button
+                              className="border shadow-lg p-2 fill-black bg-blue-400 rounded-md 	 "
+                              onClick={() => {
+                                setBuy(false);
+                              }}
+                            >
+                              No
+                            </button>
+                          </div>
+                        )}
                       </div>
                     </div>
                   </div>
@@ -322,12 +308,13 @@ const Employee = () => {
               </div>
             ))}
 
-          {filter != 'Reward' && formData &&
+          {filter != "Reward" &&
+            formData &&
             formData.forms &&
             formData.forms.map((item, index) => (
               <div className="rounded-xl relative">
                 {/* Overlay */}
-                <div className="absolute w-full h-full bg-black/50 rounded-xl text-white">
+                <div className="absolute w-full h-full bg-black/50 rounded-xl text-white ">
                   <p className="font-bold text-2xl px-2 pt-4">{item.title}</p>
                   <p className="px-2">{item.name}</p>
 
@@ -341,7 +328,7 @@ const Employee = () => {
                     Fill Form
                   </button>
 
-                  <button className="absolute bottom-4 m-2 right-4 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+                  <button className="absolute bottom-4 m-2 right-4 bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded">
                     Earn 50 coins <span className="text-sm">+</span>
                   </button>
                 </div>
