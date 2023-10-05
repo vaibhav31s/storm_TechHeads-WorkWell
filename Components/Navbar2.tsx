@@ -193,8 +193,15 @@ const Navbar = (props: Props) => {
             </button>
           ) : null} */}
 
+          
+
           <div className="flex gap-2">
             {/* Day - night toggler */}
+            {
+            data?.user?.role === "Employee" && (
+              <button className="bg-purple-400 mx-2 rounded-md p-2 dark:bg-blue-400">{data?.user?.points} Points</button>
+            )
+          }
             <span className="ml-auto">
               {currTheme.length > 0 ? (
                 <button

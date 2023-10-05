@@ -69,6 +69,7 @@ export const authOptions = {
               email: true,
               password: true,
               role: true,
+              points: true,
             },
           });
           
@@ -113,13 +114,15 @@ export const authOptions = {
         session.user.name,
         session.user.email,
         session.user.image,
-        session.user.role
+        session.user.role,
+        session.user.points
       );
       console.log("user", user);
       session.user.id = user.id;
       session.user.avatar = user.avatar;
       session.user.tag = user.username;
       session.user.role = user.role;
+      session.user.points = user.points;
       return session;
     },
   },
