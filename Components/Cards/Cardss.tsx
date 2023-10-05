@@ -4,7 +4,18 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { title } from "process";
 import React, { useEffect, useState } from "react";
+// Define a sample blog data object
+const sampleBlog = {
+  id: 1,
+  title: "Sample Blog Title",
+  text:
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in tellus in arcu convallis sollicitudin.",
+  timestamp: "2023-10-05T10:30:00Z", // A valid ISO date string
+  authors: "John Doe",
+};
 
+// Define a dummy user email
+const dummyUserEmail = "johndoe@example.com";
 type Props = {
   key: number;
   blog: Blog;
@@ -20,21 +31,75 @@ const formatDate = (date: string | undefined) => {
 
 const Cardss = (props: any) => {
   const router = useRouter();
-  const blog = {
-    id : '123',
-    userEmail : 'gawadva',
-
-  };
-  const fromBookmarked = false;
+  const blog = sampleBlog;
+  const fromBookmarked = props.fromBookmarked;
   const fromOwnBlog = props.fromOwnBlog;
   const [isBookmarked, setIsBookmarked] = useState(true);
   const [blogDelete, setBlogDelete] = useState(false);
 
   const [userEmail, setuserEmail] = useState("");
 
+  useEffect(() => {
+    const usrEmail = localStorage.getItem("userEmail");
+    if (usrEmail?.length > 0) {
+      setuserEmail(usrEmail);
+      // console.log(userName)
+    }
+  }, [userEmail]);
+  // console.log(blog)
+  function deleteBlog() {
+    // delete the blog.....
+    fetch(`/api/blog/deleteblog`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        userEmail: userEmail,
+        blogId: blog.id,
+      }),
+    })
+      .then((res) => {
+        res.json();
+        console.log(res);
+      })
+      .then((data) => console.log(data));
+    setBlogDelete(true);
+  }
+
+  const deleteBookmarked = (bid: string) => {
+    setIsBookmarked(!isBookmarked);
+    fetch(`/api/user/bookmark`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        userEmail: userEmail,
+        blogId: bid,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {});
+  };
 
   const addBookmarked = (bid: string) => {
-   
+    setIsBookmarked(!isBookmarked);
+    fetch(`/api/user/bookmark`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        userEmail: userEmail,
+        blogId: bid,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+      });
+  };
 
   return (
     <div>
