@@ -135,7 +135,7 @@ const Employee = () => {
   };
 
   const buyItem = async (rewardId: string, userId: string, price: number) => {
-        await fetch("/api/reward", {
+        await fetch("/api/redeem", {
           method : "POST",
           headers: {
             "Content-Type": "application/json",
@@ -150,6 +150,8 @@ const Employee = () => {
           if (res.ok) {
             res.json().then((data) => {
               alert("Success")
+              window.location.reload();
+
             });
           } else {
             alert("Error");
@@ -165,6 +167,7 @@ const Employee = () => {
   const [showModal, setShowModal] = useState(false);
   const [buy, setBuy] = useState(false);
   console.log("Filter ", filter);
+  const [curPrice , setCurPrice] = useState(0);
   return (
     <div className="flex justify-between">
       <div className="hidden lg:flex lg:w-1/5">
@@ -182,11 +185,11 @@ const Employee = () => {
           />
           <div className="flex items-center p-4 border-b border-purple-800">
             <div className="w-12 h-12 rounded-full  flex items-center justify-center mr-3">
-              <span>U</span>
+              <span><img src={session.data?.user?.avatar.img}></img></span>
             </div>
             <div>
-              <div className="font-semibold">User Name</div>
-              <div className="text-sm">user@example.com</div>
+              <div className="font-semibold">{session.data?.user?.name}</div>
+              <div className="text-sm">{session.data?.user?.email}</div>
             </div>
           </div>
           <nav>
@@ -254,6 +257,7 @@ const Employee = () => {
                     className="absolute bottom-4  m-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                     onClick={() => {
                       setBuy(true);
+                      setCurPrice(item.price);
                     }}
                   >
                     Redeem Now
@@ -282,7 +286,7 @@ const Employee = () => {
                       </div>
                       <div>
                         Are you really want to buy? Available Balance is {session.data?.user?.points}
-                        {session.data?.user?.points < item.price ? (
+                        {session.data?.user?.points < curPrice ? (
                           <p className="text-red-500">
                             You don't have enough balance
                             </p>

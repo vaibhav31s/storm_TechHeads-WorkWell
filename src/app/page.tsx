@@ -19,15 +19,8 @@ const Hello = (props: Props) => {
     if (session?.user?.role === "manager") {
       router.push("/manager");
     }
-    if (session?.user?.role === "employee") {
+    if (session?.user?.role === "Employee") {
       router.push("/employee");
-    } else {
-      
-      return (
-        <div>
-          <Form />
-        </div>
-      )
     }
 
     
