@@ -3,85 +3,75 @@ import React, { useState } from "react";
 import { useSession, signOut } from "next-auth/react";
 import Question from "./Question";
 import Form from "../types/Form";
+import { ToastContainer, toast } from "react-toastify";
 
 
 
-type Props = {};
+type Props = {
+  formId: string;
+  modal : any
+  fetchData1 : any
+};
 //option to select from 1 to 10
 
-const datas = {
-  "id": "651d4a68dcef21f99e56280f",
-  "title": "Company Survey form",
-  "description": "hi latest",
-  "cc": [
-      "tansh@gmail.com",
-      "hey@gmail.com"
-  ],
-  "userId": "651d1f73aab3bc90125a3935",
-  "questions": [
-      {
-          "id": "651d4a68dcef21f99e562810",
-          "title": "How you like environment in oracle?",
-          "type": [
-              "mot",
-              "chot"
-          ],
-          "options": [
-              "good",
-              "bad"
-          ],
-          "formId": "651d4a68dcef21f99e56280f"
-      },
-      {
-          "id": "651d4a68dcef21f99e562811",
-          "title": "How is work life balance? ",
-          "type": [
-              "mot",
-              "chot"
-          ],
-          "options": [
-              "good",
-              "bad"
-          ],
-          "formId": "651d4a68dcef21f99e56280f"
-      },
-      {
-          "id": "651d4a68dcef21f99e562812",
-          "title": "How is oracle mumbai branch?",
-          "type": [
-              "mot",
-              "chot"
-          ],
-          "options": [
-              "good",
-              "bad"
-          ],
-          "formId": "651d4a68dcef21f99e56280f"
-      }
-  ]
-}
 
 const Form = (props: Props) => {
   const { data, status } = useSession();
   const [forms, setForms] = useState<Form[]>([]);
+  const fetchData1 = props.fetchData1
 
+  const formId = props.formId;
+  const setShowModal = props.modal;
   console.log("form user " ,data?.user?.id)
 
+  console.log("form id " ,formId)
   const responses = new Array(10);
   // const fetchBlogs = async (q: string) => {
   //   fetch(`/api/form `)
   //     .then((res) => res.json())
   // };
 
+  const [datas, setDatas] = useState<any>();
+
+  const fetchData = async () => {
+    try {
+      const response = await fetch(`/api/form/${formId}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        }
+      });
+
+      if (response.ok) {
+        const data = await response.json().then((res) => {
+          console.log(res)
+          return res
+        });
+        console.log(data)
+        setDatas(data.data);
+      } else {
+        console.error("Failed to fetch data:", response.status);
+        throw new Error("Failed to fetch data");
+      }
+    } catch (error) {
+      console.error("Error while fetching data:", error);
+      throw error;
+    }
+  };
+
+  React.useEffect(()=>{
+    fetchData(); 
+   },[])
   const [title, setTitle] = useState("This is title");
-  const questionss = datas.questions;
+  const questionss = datas?.questions;
+  console.log("questions", questionss);
   return (
     <div className=" flex-col border rounded-md dark:text-white text-black p-2">
+      
       <div className="justify-center flex flex-row justify-items-center items-center relative">
       <h1 className="text-2xl font-bold ">{datas?.title}</h1>
       </div>
-     
-        {questionss.map((question, index) => {
+        {datas?.questions && questionss && questionss.map((question, index) => {
           return <Question index={index} arr={responses} title = {question.title}/>;
         })}
 
@@ -101,8 +91,21 @@ const Form = (props: Props) => {
                 questions: questionss,
                 responses: responses,
               }),
-            });
-          }}
+            }).then((res) => {
+              if (res.status === 200) {
+                alert("Successfully Fille the form!")
+                setShowModal(false)
+                fetchData1()
+                
+              } else {
+                alert("There is some issue Please try again letter")
+                setShowModal(false)
+                fetchData1()
+              }
+            }
+            );
+          }
+        }
         >
           Click Here to Submit
         </button>

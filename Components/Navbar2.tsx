@@ -84,7 +84,7 @@ const Navbar = (props: Props) => {
       >
         <div className="container flex flex-wrap items-center justify-between mx-auto">
           <Nav.Brand href="/" className="flex items-center cursor-pointer">
-            <img  className="h-6  mr-3 sm:h-9" alt="Logo"  src={Logo.src}/>
+            <img  className="h-12  sm:h-12" alt="Logo"  src={Logo.src}/>
             <span className="self-center text-3xl font-semibold whitespace-nowrap dark:text-white">
               WorkWell
             </span>
@@ -193,8 +193,15 @@ const Navbar = (props: Props) => {
             </button>
           ) : null} */}
 
+          
+
           <div className="flex gap-2">
             {/* Day - night toggler */}
+            {
+            data?.user?.role === "Employee" && (
+              <button className="bg-purple-400 mx-2 rounded-md p-2 dark:bg-blue-400">{data?.user?.points} Points</button>
+            )
+          }
             <span className="ml-auto">
               {currTheme.length > 0 ? (
                 <button

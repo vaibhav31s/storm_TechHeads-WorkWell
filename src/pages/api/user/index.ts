@@ -1,6 +1,16 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { prisma } from "../../../utils/db";
 
+const allUsers = async (req: NextApiRequest, res: NextApiResponse) => {
+  try {
+    
+    const users = await prisma.user.findMany();
+    res.status(200).json(users);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: "Internal server error" });
+  }
+}
 const createUser = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const { name, email, avatar } = req.body;
@@ -36,6 +46,7 @@ export default async function handler(
   const method = req.method;
   switch (method) {
     case "GET":
+      x(req , res)
       break;
     case "POST":
       createUser(req, res);

@@ -7,7 +7,7 @@ import { prisma } from "../../../../utils/db";
 const ret = async (req: NextApiRequest, res: NextApiResponse) => {
     try {
       const user : any = req.body.userId;
-
+    if(!user) throw "Error"
       const response = await prisma.form.findMany();
       const userForms = await prisma.user.findFirst({where:{
         id : user
