@@ -1,22 +1,23 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { prisma } from "../../../utils/db";
 
-
-const data = async (req: NextApiRequest, res: NextApiResponse) => {
+const gg = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
-    
-    const cost : any = req.body.cost;
-    const userId : any = req.body.userId;
+    const cost: Number = req.body.cost;
+    const userId: any = req.body.userId;
+
+    console.log(cost, userId);
     await prisma.user.update({
-        where:{
-            id : userId
+      where: {
+        id: userId,
+      },
+      data: {
+        points: {
+          decrement: cost,
         },
-        data:{
-            points:{
-                decrement : cost
-            }
-        }
-    }) 
+      },
+    });
+    res.status(200).json({ message: "success" });
   } catch (err) {
     console.log(err);
     res.status(500).json({ message: "Internal server error" });
@@ -30,10 +31,9 @@ export default async function handler(
   const method = req.method;
   switch (method) {
     case "GET":
-       
       break;
     case "POST":
-        data(req, res);
+      gg(req, res);
       break;
     case "PATCH":
       break;
