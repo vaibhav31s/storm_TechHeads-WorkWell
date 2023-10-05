@@ -78,6 +78,11 @@ const Employee = () => {
   const session = useSession();
   while (!session);
 
+
+  if(session.data?.user?.role !== "Employee"){
+    return <div>Access Denied</div>
+  }
+  
   console.log(session);
   const datas = async () => {
     try {
