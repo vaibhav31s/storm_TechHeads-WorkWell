@@ -126,11 +126,14 @@ const Register = (props: Props) => {
   }
 
   if (status === "authenticated") {
-    if (data?.user?.role === "admin") {
-      router.push("/teacher");
+    if (data?.user?.role === "Hr") {
+      router.push("/hr");
     }
-    if (data?.user?.role === "user") {
-      router.push("/student");
+    if (data?.user?.role === "Employee") {
+      router.push("/employee");
+    }
+    if (data?.user?.role === "Manager") {
+      router.push("/manager");
     }
     router.push("/");
   }
@@ -244,8 +247,10 @@ const Register = (props: Props) => {
                   setRole(e.target.value);
                 }}
               >
-                <option value="user">Student</option>
-                <option value="admin">Teacher</option>
+                <option value="Employee">Employee</option>
+                <option value="Manager">Manager</option>
+                <option value="Hr">Hr</option>
+
               </select>
             </label>
 

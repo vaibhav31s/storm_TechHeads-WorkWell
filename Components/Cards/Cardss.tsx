@@ -30,6 +30,7 @@ const liker= async (id:any) => {
     })
     .then((data) => {
       console.log(data);
+      alert("Liked ;)")
     })
     .catch((error) => {
       console.log("Error fetching user data:", error);
@@ -112,6 +113,8 @@ const Cardss = (props: any) => {
               <PiHandsClappingBold onClick={async()=>{
                 await liker(forum?.id);
                 setSelect(!select);
+
+
                 
                
               }}/>
