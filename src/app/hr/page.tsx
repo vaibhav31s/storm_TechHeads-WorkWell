@@ -8,6 +8,8 @@ import { GrUserManager } from "react-icons/gr";
 import { RiSurveyFill } from "react-icons/ri";
 import Survey from "@/Components/Survey";
 import Rewards from "@/Components/Rewards";
+import { useSession } from "next-auth/react";
+
 // import {HiUser} from 'react-icon/hi';
 
 
@@ -46,6 +48,12 @@ const HRDashboard = () => {
      })
   }
   
+const session = useSession();
+
+if(session.data?.user?.role !== "Hr"){
+  return <div>Access Denied</div>
+}
+
   React.useEffect(()=>{
     getSurveyData()
   },[])

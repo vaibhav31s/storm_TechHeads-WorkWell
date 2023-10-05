@@ -78,6 +78,11 @@ const Employee = () => {
   const session = useSession();
   while (!session);
 
+
+  if(session.data?.user?.role !== "Employee"){
+    return <div>Access Denied</div>
+  }
+  
   console.log(session);
   const datas = async () => {
     try {
@@ -112,6 +117,7 @@ const Employee = () => {
       setFormData(result);
       console.log(formData);
       // Now you can use 'result' here
+      
     } catch (error) {
       // Handle errors here
     }
