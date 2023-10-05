@@ -165,7 +165,7 @@ const Employee = () => {
   const [curPrice, setCurPrice] = useState(0);
   return (
     <div className="flex justify-between">
-      <div className="hidden lg:flex lg:w-1/5">
+      <div className="sm:flex sm flex-row lg:flex lg:w-1/5">
         {/* Side drawer menu */}
 
         <div
