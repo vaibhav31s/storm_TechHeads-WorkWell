@@ -46,7 +46,7 @@ export default async function handler(
   const method = req.method;
   switch (method) {
     case "GET":
-      x(req , res)
+      allUsers(req , res)
       break;
     case "POST":
       createUser(req, res);
