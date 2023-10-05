@@ -47,12 +47,7 @@ const HRDashboard = () => {
       console.log("Error fetching user data:",error)
      })
   }
-  
-const session = useSession();
 
-if(session.data?.user?.role !== "Hr"){
-  return <div>Access Denied</div>
-}
 
   React.useEffect(()=>{
     getSurveyData()
