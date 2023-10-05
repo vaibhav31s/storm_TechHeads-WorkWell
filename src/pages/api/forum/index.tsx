@@ -7,7 +7,11 @@ const data  = async (req: NextApiRequest, res: NextApiResponse) => {
       const d = await prisma.Post.findMany({
         orderBy: {
         date: 'asc'
-      }});
+      },
+      include : {
+        user : true
+      }}
+      );
       res.status(200).json(d);
     } catch (err) {
       console.log(err);
