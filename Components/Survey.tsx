@@ -7,6 +7,7 @@ type Props = {};
 
 const Survey = (props: Props) => {
   const [showCreate, setShow] = useState(false);
+  const [allForms,setAllForms] = useState([])
   const [surveyData, setSurveyData] = useState({
     title: "",
     description: "",
@@ -169,6 +170,27 @@ const Survey = (props: Props) => {
     }));
   };
 
+  const getSurveyData:any = async()=>{
+    await  fetch("/api/form")
+     .then((response)=>{
+      if(!response.ok){
+        throw new Error("Network response was not ok");
+      }
+      return response.json();
+     })
+     .then((data)=>{
+       console.log(data)
+       setAllForms(data.allForms)
+     })
+     .catch((error)=>{
+      console.log("Error fetching user data:",error)
+     })
+  }
+  
+  React.useEffect(()=>{
+    getSurveyData()
+  },[])
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(surveyData)
@@ -199,14 +221,26 @@ const Survey = (props: Props) => {
             className="flex justify-center items-center flex-wrap"
             style={{ maxHeight: "400px" }}
           >
-            {datas.data.map((questions) => (
+            {/* {datas.data.map((questions) => (
               <Card className="mx-2 w-48 h-48 hover:cursor-pointer hover:shadow-xl">
                 <h4 className="text-xl font-bold">{questions.title}</h4>
                 <h5 className="text-base overflow-hidden overflow-ellipsis">
                   {questions.description}
                 </h5>
               </Card>
+            ))} */}
+            <div className="flex overflow-x-auto w-full">
+
+            {allForms.map((questions) => (
+                <Card className="mx-2 w-48 h-48 hover:cursor-pointer hover:shadow-xl">
+                <h4 className="text-xl font-bold">{questions.title}</h4>
+                <h5 className="text-base overflow-hidden overflow-ellipsis">
+                  {questions.description}
+                </h5>
+              </Card>
             ))}
+            
+            </div>
           </div>
           <div className="flex mt-8 justify-center items-center">
             <Card className="w-48 h-48 hover:cursor-pointer opacity-75 hover:opacity-100 hover:shadow-lg transition-all duration-100">
