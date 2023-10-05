@@ -12,6 +12,28 @@ import Rewards from "@/Components/Rewards";
 let emp_no = 50;
 
 const HRDashboard = () => {
+  const [userData, setUserData]= useState(null);
+  const getSurveyData:any = async()=>{
+    await  fetch("/api/pillars")
+     .then((response)=>{
+      if(!response.ok){
+        throw new Error("Network response was not ok");
+      }
+      return response.json();
+     })
+     .then((data)=>{
+       console.log(data.resData)
+      setUserData(data)
+     })
+     .catch((error)=>{
+      console.log("Error fetching user data:",error)
+     })
+  }
+  
+  React.useEffect(()=>{
+    getSurveyData()
+  },[])
+  
   return (
     <>
       <div className="card-container flex">
