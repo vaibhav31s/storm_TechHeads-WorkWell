@@ -112,6 +112,7 @@ const Employee = () => {
       setFormData(result);
       console.log(formData);
       // Now you can use 'result' here
+      
     } catch (error) {
       // Handle errors here
     }

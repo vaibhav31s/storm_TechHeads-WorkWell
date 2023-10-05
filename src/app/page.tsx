@@ -22,18 +22,14 @@ const Hello = (props: Props) => {
     if (session?.user?.role === "Employee") {
       router.push("/employee");
     }
-
-    
-
-    
     return (
       <Loading/>
     );
   }
   return <div>
-      
-      
-      <Footer />
+      <Landing/>
+
+      {/* <Footer /> */}
     </div>;
 };
 
