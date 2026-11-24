@@ -19,18 +19,9 @@ const signup = async (req: NextApiRequest, res: NextApiResponse) => {
       return;
     }
 
-    // const rooll = await prisma.user.findUnique({
-    //   where: {
-    //     // @ts-ignore
-    //     empId: empId,
-    //   },
-    // });
-
-    if(empId){
-      if (empId) {
-        res.status(400).json({ message: "empId already exist" });
-        return;
-      }
+    if (empId && (await prisma.user.findFirst({ where: { empId: empId } }))) {
+      res.status(400).json({ message: "empId already exist" });
+      return;
     }
 
     hash(password, saltRounds, async (err, hash) => {
@@ -38,17 +29,22 @@ const signup = async (req: NextApiRequest, res: NextApiResponse) => {
         res.status(500).json({ message: "Internal server error" });
         return;
       }
-      const newUser = await prisma.user.create({
-        data: {
-          email: email,
-          password: hash,
-          name: name,
-          avatar: avatar,
-          role: role,
-          empId: empId,
-        },
-      });
-      res.status(200).json(omitPassword(newUser));
+      try {
+        const newUser = await prisma.user.create({
+          data: {
+            email: email,
+            password: hash,
+            name: name,
+            avatar: avatar,
+            role: role,
+            empId: empId,
+          },
+        });
+        res.status(200).json(omitPassword(newUser));
+      } catch (createErr) {
+        console.log(createErr);
+        res.status(500).json({ message: "Internal server error" });
+      }
     });
   } catch (err) {
     console.log(err);
