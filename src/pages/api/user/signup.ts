@@ -6,7 +6,6 @@ const saltRounds = 10;
 const signup = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const { email, password, name, avatar, role , empId, form,Response} = req.body;
-    console.log(email, password, name, avatar, role, empId);
     
     
     const user = await prisma.user.findFirst({
