@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { PhoneIcon, ArrowSmRightIcon } from '@heroicons/react/outline';
-import {ChipIcon, SupportIcon} from '@heroicons/react/solid'
+import { PhoneIcon, ArrowSmallRightIcon } from '@heroicons/react/24/outline';
+import {CpuChipIcon, LifebuoyIcon} from '@heroicons/react/20/solid'
 
 import supportImg from '../assets/support.jpg'
 
@@ -29,7 +29,7 @@ const Support = () => {
               </div>
               <div className='bg-white rounded-xl shadow-2xl hover:scale-110'>
                   <div className='p-8'>
-                      <SupportIcon className='w-16 p-4 bg-indigo-600 text-white rounded-lg mt-[-4rem]' />
+                      <LifebuoyIcon className='w-16 p-4 bg-indigo-600 text-white rounded-lg mt-[-4rem]' />
                       <h3 className='font-bold text-2xl my-6'>Recognition</h3>
                       <p className='text-gray-600 text-xl'>Encourage peer-to-peer recognition to foster trust and collaboration among teams</p>
                   </div>
@@ -37,7 +37,7 @@ const Support = () => {
               </div>
               <div className='bg-white rounded-xl shadow-2xl hover:scale-110'>
                   <div className='p-8'>
-                      <ChipIcon className='w-16 p-4 bg-indigo-600 text-white rounded-lg mt-[-4rem]' />
+                      <CpuChipIcon className='w-16 p-4 bg-indigo-600 text-white rounded-lg mt-[-4rem]' />
                       <h3 className='font-bold text-2xl my-6'>Rewards</h3>
                       <p className='text-gray-600 text-xl'>Delight employee with an extensive global catalog with more than 20000 reward choices</p>
                   </div>

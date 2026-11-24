@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import { Link, animateScroll as scroll, } from 'react-scroll'
 
 
-import { MenuIcon, XIcon } from '@heroicons/react/outline';
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 
 const Navbar = () => {
     const [nav, setNav] = useState(false)

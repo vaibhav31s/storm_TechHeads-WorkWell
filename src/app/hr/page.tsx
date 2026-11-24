@@ -1,7 +1,7 @@
 "use client";
 import BarChart from "@/Components/Chart/BarChart";
 import FeedbackCard from "@/Components/FeedbackCard";
-import { Sidebar, Card } from "flowbite-react";
+import { Sidebar, SidebarItems, SidebarItemGroup, SidebarItem, Card } from "flowbite-react";
 import React, { useEffect, useState } from "react";
 import { BsFillPersonFill } from "react-icons/bs";
 import { GrUserManager } from "react-icons/gr";
@@ -107,22 +107,22 @@ const page = (props: Props) => {
     <>
       <div className="flex h-full">
         <Sidebar className="h-[95vh]">
-          <Sidebar.Items>
-            <Sidebar.ItemGroup className="h-[95vh]">
-              <Sidebar.Item key={1} onClick={() => handleClick(1)}>
+          <SidebarItems>
+            <SidebarItemGroup className="h-[95vh]">
+              <SidebarItem key={1} onClick={() => handleClick(1)}>
                 Dashboard
-              </Sidebar.Item>
-              <Sidebar.Item key={2} onClick={() => handleClick(2)}>
+              </SidebarItem>
+              <SidebarItem key={2} onClick={() => handleClick(2)}>
                 Feedback
-              </Sidebar.Item>
-              <Sidebar.Item key={3} onClick={() => handleClick(3)}>
+              </SidebarItem>
+              <SidebarItem key={3} onClick={() => handleClick(3)}>
                 Surveys
-              </Sidebar.Item>
-              <Sidebar.Item key={4} onClick={() => handleClick(4)}>
+              </SidebarItem>
+              <SidebarItem key={4} onClick={() => handleClick(4)}>
                 Rewards
-              </Sidebar.Item>
-            </Sidebar.ItemGroup>
-          </Sidebar.Items>
+              </SidebarItem>
+            </SidebarItemGroup>
+          </SidebarItems>
         </Sidebar>
         <div className="h-full w-full m-4 justify-center items-center">
           {cur === 1 && <HRDashboard />}

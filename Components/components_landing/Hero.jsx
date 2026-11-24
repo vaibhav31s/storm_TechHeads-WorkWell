@@ -1,10 +1,10 @@
 import React from 'react'
 import {
-    CloudUploadIcon,
-    DatabaseIcon,
+    CloudArrowUpIcon,
+    CircleStackIcon,
     PaperAirplaneIcon,
     ServerIcon,
-} from '@heroicons/react/solid'
+} from '@heroicons/react/20/solid'
 import umar from "public/attendaceLogo.png";
 
 

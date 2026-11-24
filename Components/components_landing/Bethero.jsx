@@ -3,11 +3,11 @@ import double from '../assets/double.png'
 import single from '../assets/single.png'
 import triple from '../assets/triple.png'
 import {
-    CloudUploadIcon,
-    DatabaseIcon,
+    CloudArrowUpIcon,
+    CircleStackIcon,
     PaperAirplaneIcon,
     ServerIcon,
-} from '@heroicons/react/solid'
+} from '@heroicons/react/20/solid'
 
 const BetHero = () => {
   return (
