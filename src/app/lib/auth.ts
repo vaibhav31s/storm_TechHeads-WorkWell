@@ -9,7 +9,7 @@ export const authOptions: NextAuthOptions = {
         })
     ],
     database: process.env.DATABASE_URL,
-    secret: process.env.SECRET,
+    secret: process.env.NEXTAUTH_SECRET,
     pages: {
         signIn: "/auth/signin",
     },
